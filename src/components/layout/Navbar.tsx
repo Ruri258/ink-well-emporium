@@ -1,10 +1,25 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, User, Menu, X, Search } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, Search, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const categories = [
   { name: "Бумага и бумажная продукция", path: "/products/paper" },
@@ -14,6 +29,21 @@ const categories = [
   { name: "Товары для офиса", path: "/products/office" },
   { name: "Товары для школы", path: "/products/school" },
   { name: "Хозтовары и химия", path: "/products/chemicals" },
+];
+
+// Additional navigation items for the dropdown menus
+const companyLinks = [
+  { name: "О компании", path: "/about" },
+  { name: "Гарантии", path: "/guarantees" },
+  { name: "Политика конфиденциальности", path: "/privacy" },
+  { name: "Вакансии", path: "/careers" },
+];
+
+const customerLinks = [
+  { name: "Как заказать", path: "/how-to-order" },
+  { name: "Оплата", path: "/payment" },
+  { name: "Доставка", path: "/delivery" },
+  { name: "Обмен и возврат", path: "/returns" },
 ];
 
 const Navbar = () => {
@@ -34,7 +64,16 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container-custom">
-        {/* Top bar with logo and icons */}
+        {/* Top bar with customer service links */}
+        <div className="py-2 text-sm border-b border-gray-100 hidden md:flex items-center space-x-6 text-gray-600">
+          {customerLinks.map(link => (
+            <Link key={link.path} to={link.path} className="hover:text-stationery-600 transition-colors">
+              {link.name}
+            </Link>
+          ))}
+        </div>
+        
+        {/* Main header with logo and icons */}
         <div className="flex items-center justify-between py-4">
           <Link to="/" className="text-2xl font-bold text-stationery-800">
             Канцелярский центр
@@ -104,32 +143,101 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Navigation links - desktop */}
+        {/* Navigation menu with dropdowns - desktop */}
         {!isMobile && (
-          <nav className="py-3 border-t">
-            <ul className="flex space-x-8">
-              <li>
-                <Link to="/" className="text-gray-700 hover:text-stationery-600 transition-colors font-medium">
+          <NavigationMenu className="py-3 border-t">
+            <NavigationMenuList className="flex">
+              <NavigationMenuItem>
+                <Link to="/" className="text-gray-700 hover:text-stationery-600 transition-colors font-medium px-4">
                   Главная
                 </Link>
-              </li>
-              <li>
-                <Link to="/products" className="text-gray-700 hover:text-stationery-600 transition-colors">
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-gray-700 hover:text-stationery-600 transition-colors">
                   Каталог
-                </Link>
-              </li>
-              <li>
-                <Link to="/news" className="text-gray-700 hover:text-stationery-600 transition-colors">
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white p-4 shadow-lg rounded-md w-[400px]">
+                  <ul className="grid grid-cols-2 gap-3">
+                    {categories.map((category) => (
+                      <li key={category.path}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={category.path}
+                            className="block p-2 hover:bg-gray-50 rounded-md"
+                          >
+                            {category.name}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-gray-700 hover:text-stationery-600 transition-colors">
                   Новости
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-700 hover:text-stationery-600 transition-colors">
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white p-4 shadow-lg rounded-md w-[250px]">
+                  <ul className="space-y-2">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/news"
+                          className="block p-2 hover:bg-gray-50 rounded-md"
+                        >
+                          Все новости
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/news/promotions"
+                          className="block p-2 hover:bg-gray-50 rounded-md"
+                        >
+                          Акции и скидки
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-gray-700 hover:text-stationery-600 transition-colors">
                   Контакты
-                </Link>
-              </li>
-            </ul>
-          </nav>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white p-4 shadow-lg rounded-md w-[250px]">
+                  <ul className="space-y-2">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to="/contact"
+                          className="block p-2 hover:bg-gray-50 rounded-md"
+                        >
+                          Наши контакты
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    {companyLinks.map(link => (
+                      <li key={link.path}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to={link.path}
+                            className="block p-2 hover:bg-gray-50 rounded-md"
+                          >
+                            {link.name}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         )}
       </div>
 
@@ -167,43 +275,87 @@ const Navbar = () => {
                   Главная
                 </Link>
               </li>
-              <li>
-                <Link 
-                  to="/products" 
-                  className="text-lg font-medium block py-2"
-                  onClick={toggleMobileMenu}
-                >
-                  Каталог
-                </Link>
+              
+              {/* Mobile collapsible menus */}
+              <li className="border-b pb-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-between p-0 h-auto">
+                      <span className="text-lg font-medium">Каталог</span>
+                      <ChevronDown size={16} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {categories.map((category) => (
+                      <DropdownMenuItem key={category.path} asChild>
+                        <Link 
+                          to={category.path}
+                          onClick={toggleMobileMenu}
+                        >
+                          {category.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </li>
-              {categories.map((category) => (
-                <li key={category.path}>
-                  <Link 
-                    to={category.path} 
-                    className="text-gray-700 block py-2 pl-4"
-                    onClick={toggleMobileMenu}
-                  >
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link 
-                  to="/news" 
-                  className="text-gray-700 block py-2"
-                  onClick={toggleMobileMenu}
-                >
-                  Новости
-                </Link>
+              
+              <li className="border-b pb-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-between p-0 h-auto">
+                      <span className="text-lg font-medium">Новости</span>
+                      <ChevronDown size={16} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link to="/news" onClick={toggleMobileMenu}>Все новости</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/news/promotions" onClick={toggleMobileMenu}>Акции и скидки</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </li>
+              
+              <li className="border-b pb-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-between p-0 h-auto">
+                      <span className="text-lg font-medium">Контакты</span>
+                      <ChevronDown size={16} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link to="/contact" onClick={toggleMobileMenu}>Наши контакты</Link>
+                    </DropdownMenuItem>
+                    {companyLinks.map(link => (
+                      <DropdownMenuItem key={link.path} asChild>
+                        <Link to={link.path} onClick={toggleMobileMenu}>{link.name}</Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
+              
+              {/* Additional mobile links */}
               <li>
-                <Link 
-                  to="/contact" 
-                  className="text-gray-700 block py-2"
-                  onClick={toggleMobileMenu}
-                >
-                  Контакты
-                </Link>
+                <div className="text-sm text-gray-500 font-medium mb-2">Информация для клиентов:</div>
+                <ul className="space-y-3 pl-2">
+                  {customerLinks.map(link => (
+                    <li key={link.path}>
+                      <Link 
+                        to={link.path} 
+                        className="text-gray-700 block py-1"
+                        onClick={toggleMobileMenu}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
             </ul>
           </nav>
