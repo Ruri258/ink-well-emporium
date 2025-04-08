@@ -13,6 +13,7 @@ import News from "./pages/News";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Remove unused App.css import
 const queryClient = new QueryClient();
 
 const App = () => (
