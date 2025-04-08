@@ -7,11 +7,13 @@ import { Input } from '@/components/ui/input';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const categories = [
-  { name: "Ручки", path: "/products/pens" },
-  { name: "Тетради", path: "/products/notebooks" },
-  { name: "Офисные принадлежности", path: "/products/office" },
-  { name: "Творчество", path: "/products/creative" },
-  { name: "Школьные товары", path: "/products/school" },
+  { name: "Бумага и бумажная продукция", path: "/products/paper" },
+  { name: "Мебель", path: "/products/furniture" },
+  { name: "Офисная кухня", path: "/products/kitchen" },
+  { name: "Техника и расходные материалы", path: "/products/tech" },
+  { name: "Товары для офиса", path: "/products/office" },
+  { name: "Товары для школы", path: "/products/school" },
+  { name: "Хозтовары и химия", path: "/products/chemicals" },
 ];
 
 const Navbar = () => {
@@ -85,6 +87,23 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Categories navigation bar */}
+        {!isMobile && (
+          <div className="bg-stationery-600 px-4 py-2 -mx-6 overflow-x-auto">
+            <div className="flex space-x-6 text-white whitespace-nowrap">
+              {categories.map((category) => (
+                <Link 
+                  key={category.path}
+                  to={category.path} 
+                  className="text-white hover:text-white/80 text-sm font-medium py-1 transition-colors"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Navigation links - desktop */}
         {!isMobile && (
           <nav className="py-3 border-t">
@@ -94,16 +113,11 @@ const Navbar = () => {
                   Главная
                 </Link>
               </li>
-              {categories.map((category) => (
-                <li key={category.path}>
-                  <Link 
-                    to={category.path} 
-                    className="text-gray-700 hover:text-stationery-600 transition-colors"
-                  >
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/products" className="text-gray-700 hover:text-stationery-600 transition-colors">
+                  Каталог
+                </Link>
+              </li>
               <li>
                 <Link to="/news" className="text-gray-700 hover:text-stationery-600 transition-colors">
                   Новости
@@ -153,11 +167,20 @@ const Navbar = () => {
                   Главная
                 </Link>
               </li>
+              <li>
+                <Link 
+                  to="/products" 
+                  className="text-lg font-medium block py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Каталог
+                </Link>
+              </li>
               {categories.map((category) => (
                 <li key={category.path}>
                   <Link 
                     to={category.path} 
-                    className="text-gray-700 block py-2"
+                    className="text-gray-700 block py-2 pl-4"
                     onClick={toggleMobileMenu}
                   >
                     {category.name}

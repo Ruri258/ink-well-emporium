@@ -30,28 +30,38 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Категории</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/products/pens" className="text-gray-600 hover:text-stationery-600 transition-colors">
-                  Ручки
+                <Link to="/products/paper" className="text-gray-600 hover:text-stationery-600 transition-colors">
+                  Бумага и бумажная продукция
                 </Link>
               </li>
               <li>
-                <Link to="/products/notebooks" className="text-gray-600 hover:text-stationery-600 transition-colors">
-                  Тетради
+                <Link to="/products/furniture" className="text-gray-600 hover:text-stationery-600 transition-colors">
+                  Мебель
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/kitchen" className="text-gray-600 hover:text-stationery-600 transition-colors">
+                  Офисная кухня
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/tech" className="text-gray-600 hover:text-stationery-600 transition-colors">
+                  Техника и расходные материалы
                 </Link>
               </li>
               <li>
                 <Link to="/products/office" className="text-gray-600 hover:text-stationery-600 transition-colors">
-                  Офисные принадлежности
-                </Link>
-              </li>
-              <li>
-                <Link to="/products/creative" className="text-gray-600 hover:text-stationery-600 transition-colors">
-                  Творчество
+                  Товары для офиса
                 </Link>
               </li>
               <li>
                 <Link to="/products/school" className="text-gray-600 hover:text-stationery-600 transition-colors">
-                  Школьные товары
+                  Товары для школы
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/chemicals" className="text-gray-600 hover:text-stationery-600 transition-colors">
+                  Хозтовары и бытовая химия
                 </Link>
               </li>
             </ul>

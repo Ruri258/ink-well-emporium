@@ -4,46 +4,52 @@ import { Link } from 'react-router-dom';
 
 const categories = [
   {
-    id: 'office',
-    name: 'Офисные товары',
-    image: 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-    count: '250+ товаров'
-  },
-  {
-    id: 'school',
-    name: 'Школьные принадлежности',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1022&q=80',
-    count: '180+ товаров'
-  },
-  {
-    id: 'pens',
-    name: 'Ручки и карандаши',
-    image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1010&q=80',
-    count: '120+ товаров'
-  },
-  {
-    id: 'notebooks',
-    name: 'Тетради и блокноты',
-    image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
-    count: '90+ товаров'
-  },
-  {
-    id: 'creative',
-    name: 'Товары для творчества',
-    image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80',
-    count: '150+ товаров'
-  },
-  {
     id: 'paper',
     name: 'Бумага и бумажная продукция',
     image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
-    count: '70+ товаров'
+    count: '120+ товаров'
+  },
+  {
+    id: 'furniture',
+    name: 'Мебель',
+    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80',
+    count: '85+ товаров'
+  },
+  {
+    id: 'kitchen',
+    name: 'Офисная кухня',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    count: '60+ товаров'
+  },
+  {
+    id: 'tech',
+    name: 'Техника и расходные материалы',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80',
+    count: '110+ товаров'
+  },
+  {
+    id: 'office',
+    name: 'Товары для офиса, канцтовары',
+    image: 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    count: '180+ товаров'
+  },
+  {
+    id: 'school',
+    name: 'Товары для школы',
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1022&q=80',
+    count: '150+ товаров'
+  },
+  {
+    id: 'chemicals',
+    name: 'Хозтовары и бытовая химия',
+    image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    count: '90+ товаров'
   }
 ];
 
 const CategoryShowcase = () => {
   return (
-    <section className="section bg-gradient-to-b from-white to-gray-50">
+    <section className="section bg-gradient-to-b from-white to-gray-50 py-12">
       <div className="container-custom">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Категории товаров</h2>
@@ -52,7 +58,7 @@ const CategoryShowcase = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {categories.map((category) => (
             <Link 
               key={category.id}
